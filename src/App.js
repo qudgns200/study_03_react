@@ -1,41 +1,27 @@
 import React from 'react';
 import PropTypes from "prop-types"
 
-function Food({name, image, rating}) {
-  return <div>
-    <h2>I like {name}</h2>
-    <h2> {image} </h2>
-  </div>;
-}
+class App extends React.Component {
+  state = {
+    isLoading: true
+    movies: []
+  };
 
-const fav = [
-  {
-    id : 1,
-    name : "kimchi",
-    image : "CCCC",
-  },
-  {
-    id : 2,
-    name : "gogi",
-    image : "DDDD",
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({isLoading: false});
+    }, 3000);
   }
-];
 
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  rating: PropTypes.number,
-};
+  render() {
+    const {isLoading} = this.state;
 
-function App() {
-  return (
-    <div>
-      {fav.map(dish => (
-        <Food key={dish.id} name={dish.name} image={dish.image} rating={dish.rating} />
-        ))
-      }
-    </div>
+    return (
+      <div>
+        {this.state.isLoading ? "Loading" : "We are ready"}
+      </div>
     );
+  } 
 }
 
 export default App;
